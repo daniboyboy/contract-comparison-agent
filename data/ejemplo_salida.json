@@ -1,0 +1,82 @@
+{
+  "contrato_original": "data/test_contracts/documento1_original.jpg",
+  "contrato_enmendado": "data/test_contracts/documento1_enmienda.jpg",
+  "fecha_analisis": "2026-09-09T16:12:03",
+  "trace_id": "ed31eb2e332699bf1668e1baa1c31a7b",
+  "tokens_parsing": 3076,
+  "cambios_detectados": 10,
+  "analisis": {
+    "changes": [
+      {
+        "change_type": "modification",
+        "summary": "El título del contrato ahora incluye la palabra 'ENMIENDA', indicando que se trata de una modificación al contrato original.",
+        "sections_changed": [
+          "TITULO"
+        ]
+      },
+      {
+        "change_type": "modification",
+        "summary": "El preámbulo ahora especifica que el documento es una enmienda al contrato original, en lugar de referirse simplemente como el contrato.",
+        "sections_changed": [
+          "PREAMBULO"
+        ]
+      },
+      {
+        "change_type": "deletion",
+        "summary": "Se eliminó la restricción de que la licencia sea 'intransferible'. Esto implica que el Licenciatario podría transferir la licencia, a menos que otra cláusula lo prohíba.",
+        "sections_changed": [
+          "1. Otorgamiento de Licencia"
+        ]
+      },
+      {
+        "change_type": "deletion",
+        "summary": "Se eliminó la palabra 'únicamente', lo que podría permitir usos más amplios del software dentro de las operaciones internas del negocio.",
+        "sections_changed": [
+          "1. Otorgamiento de Licencia"
+        ]
+      },
+      {
+        "change_type": "modification",
+        "summary": "La descripción del uso permitido del software cambió de 'fines internos de la empresa' a 'operaciones internas de negocio', lo que podría ampliar el alcance de uso permitido.",
+        "sections_changed": [
+          "1. Otorgamiento de Licencia"
+        ]
+      },
+      {
+        "change_type": "modification",
+        "summary": "El plazo del contrato se extendió de 12 meses a 24 meses, duplicando la duración del acuerdo.",
+        "sections_changed": [
+          "2. Plazo"
+        ]
+      },
+      {
+        "change_type": "modification",
+        "summary": "La tarifa anual de licencia aumentó de USD 12.000 a USD 15.000, incrementando el costo para el Licenciatario.",
+        "sections_changed": [
+          "3. Pago"
+        ]
+      },
+      {
+        "change_type": "modification",
+        "summary": "Se agregó soporte técnico vía chat, además del soporte por correo electrónico, ampliando las opciones de soporte disponibles para el Licenciatario.",
+        "sections_changed": [
+          "4. Soporte"
+        ]
+      },
+      {
+        "change_type": "modification",
+        "summary": "El período de notificación para la terminación del contrato se extendió de 30 días a 60 días, lo que proporciona más tiempo para la planificación antes de la terminación.",
+        "sections_changed": [
+          "5. Terminación"
+        ]
+      },
+      {
+        "change_type": "addition",
+        "summary": "Se agregó una nueva sección sobre Protección de Datos, comprometiendo al Licenciante a cumplir con las normativas aplicables en materia de protección de datos en relación con la información del Licenciatario.",
+        "sections_changed": [
+          "7. Protección de Datos"
+        ]
+      }
+    ]
+  }
+}
