@@ -29,12 +29,23 @@ class ContractChangeOutput(BaseModel):
 
     change_type: TipoDeCambio = Field(
         description=(
-            "Tipo de cambio. 'addition' si la enmienda incorpora una clausula o "
-            "disposicion que no existia. 'deletion' si elimina una obligacion, "
-            "restriccion o derecho presente en el original, incluso cuando la "
-            "eliminacion ocurre dentro de una clausula reformulada. "
-            "'modification' si altera terminos existentes (montos, plazos, "
-            "porcentajes, alcance)."
+            "Tipo de cambio, determinado por la seccion y no por el texto. "
+            "'addition': la enmienda incorpora una seccion o clausula COMPLETA que no "
+            "tenia contraparte en el original. Que una clausula existente gane texto "
+            "NO es una adicion: si la seccion ya existia en ambas versiones, el cambio "
+            "es 'modification', aunque se le haya agregado contenido. "
+            "'deletion': una obligacion, restriccion, derecho o condicion presente en "
+            "el original desaparece SIN que nada la reemplace, ya sea porque se suprime "
+            "la seccion entera o porque se elimina una frase dentro de una clausula "
+            "reformulada. La prueba se aplica al elemento suprimido, no a la clausula: "
+            "un valor sustituido por otro valor es modificacion, pero un calificador o "
+            "una restriccion que desaparece sin equivalente funcional es eliminacion, "
+            "aunque la clausula se haya reformulado por completo. "
+            "'modification': la seccion existe en ambas versiones y su contenido "
+            "cambia, ya sea por alteracion de valores (montos, plazos, porcentajes), "
+            "por reformulacion, o por incorporacion de texto nuevo dentro de ella. "
+            "El titulo y el preambulo existen en ambas versiones: sus cambios son "
+            "siempre 'modification', nunca 'addition'."
         )
     )
 
@@ -87,10 +98,12 @@ class ContractAnalysis(BaseModel):
     changes: list[ContractChangeOutput] = Field(
         min_length=1,
         description=(
-            "Lista de todos los cambios sustantivos detectados entre el contrato "
-            "original y su enmienda. Excluir cambios puramente formales, como la "
-            "modificacion del titulo o del preambulo cuando el documento se "
-            "presenta como enmienda: no alteran obligaciones de las partes."
+            "Lista exhaustiva de TODOS los cambios detectados entre el contrato "
+            "original y su enmienda, por minimos que sean, incluidos los cambios de "
+            "titulo y de preambulo. No omitir ninguna diferencia de contenido. La "
+            "unica excepcion son las diferencias atribuibles a la transcripcion de "
+            "la imagen (espaciado, tipo de comillas, acentos): esas no son cambios "
+            "del documento sino de su lectura."
         ),
     )
 
