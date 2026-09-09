@@ -144,8 +144,10 @@ PIM4/
 │       └── extraction_agent.py          Agente 2
 ├── data/test_contracts/                 Contratos de prueba
 ├── outputs/                             Resultados (ignorado por git)
+├── smoke/                               Verificación aislada de cada integración
+├── prep_ground_truth.py                 Transcripción y diff determinista de los pares
 ├── validate_holdout.py                  Validación sobre conjunto reservado
-├── NOTAS.md                             Registro de decisiones de diseño
+├── DECISIONES.md                        Registro de decisiones de diseño
 ├── requirements.txt
 └── .env.example
 ```
@@ -184,8 +186,8 @@ de título y preámbulo, indicando en el resumen cuándo un cambio no altera obl
 acentos—: no son cambios del documento sino de su lectura, y reportarlas sería afirmar
 algo falso sobre un documento legal.
 
-El detalle de cada decisión, con sus alternativas descartadas y el historial de iteración
-de los prompts, está en [`NOTAS.md`](NOTAS.md).
+El detalle de cada decisión, con sus alternativas descartadas, los cinco ciclos de
+iteración de los prompts y sus mediciones, está en [`DECISIONES.md`](DECISIONES.md).
 
 ---
 
@@ -199,6 +201,11 @@ casos de prueba.
 La verdad de referencia se construyó comparando las transcripciones con `difflib`, un diff
 determinista. Usar un LLM para generarla habría significado evaluar al modelo con su
 propia tarea.
+
+Antes de escribir el pipeline, cada integración se verificó por separado con los scripts
+de `smoke/`: credenciales de OpenAI, visión sobre las imágenes reales y jerarquía de
+trazado en Langfuse. Con tres scripts breves, cada falla apunta a un solo culpable; con el
+pipeline completo, una excepción puede venir de cuatro sitios distintos.
 
 ```bash
 python validate_holdout.py
