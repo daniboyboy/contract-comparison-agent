@@ -145,6 +145,7 @@ PIM4/
 ├── data/test_contracts/                 Contratos de prueba
 ├── outputs/                             Resultados (ignorado por git)
 ├── smoke/                               Verificación aislada de cada integración
+├── demo_errores.py                      Demostración de las tres capas de validación
 ├── prep_ground_truth.py                 Transcripción y diff determinista de los pares
 ├── validate_holdout.py                  Validación sobre conjunto reservado
 ├── DECISIONES.md                        Registro de decisiones de diseño
@@ -206,6 +207,26 @@ Antes de escribir el pipeline, cada integración se verificó por separado con l
 de `smoke/`: credenciales de OpenAI, visión sobre las imágenes reales y jerarquía de
 trazado en Langfuse. Con tres scripts breves, cada falla apunta a un solo culpable; con el
 pipeline completo, una excepción puede venir de cuatro sitios distintos.
+
+### Manejo de errores
+
+```bash
+python demo_errores.py
+```
+
+Provoca doce fallos deliberados y muestra dónde se ataja cada uno. No realiza llamadas a
+la API: todos ocurren antes de que haya red de por medio.
+
+| Capa | Qué protege | Casos |
+|---|---|---|
+| Entrada | Evita gastar tokens en archivos inválidos | Archivo inexistente, extensión no soportada, ruta que es un directorio |
+| Insumos | Evita llamar al modelo con contexto incompleto | Textos vacíos entre agentes, extracción sin mapa |
+| Esquema | Impide entregar datos que no cumplen el contrato | Tipo fuera del vocabulario, resumen sin contenido, sin secciones, secciones en blanco, campo inventado, análisis vacío |
+
+Dos casos quedan fuera de esa demo por requerir condiciones reales de red. Los errores
+transitorios —timeout, caída de conexión, límite de tasa— se reintentan hasta tres veces
+con espera creciente. Los permanentes —credenciales inválidas, petición malformada— fallan
+de inmediato: reintentar una clave inválida solo alarga la espera hasta el mismo error.
 
 ```bash
 python validate_holdout.py
