@@ -17,16 +17,6 @@ identifica y resume los cambios legales, devolviendo un JSON validado y trazado.
 
 ---
 
-## 1. Contexto
-
-Sistema multi-agente que recibe imágenes escaneadas de un contrato y su enmienda,
-extrae el texto con un modelo de visión, y mediante dos agentes especializados
-identifica y resume los cambios legales, devolviendo un JSON validado y trazado.
-
-Evaluación: defensa técnica en vivo, 1 a 1, 30 minutos.
-
----
-
 ## 2. Decisiones de diseño
 
 ### 2.1 Qué significa "agente" en esta implementación
@@ -42,7 +32,7 @@ handoff de contexto, no autonomía.
 
 **Cómo defenderlo:** son agentes en el sentido de *rol especializado con contrato de
 entrada/salida propio y estado que se traspasa*, no en el sentido de *loop autónomo
-con tools*. La distinción se explica; no se disfraza.
+con tools*. 
 
 ### 2.2 Modelos
 
