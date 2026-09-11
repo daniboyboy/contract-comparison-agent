@@ -39,8 +39,7 @@ con tools*.
 **Decisión:** `gpt-4o` para el parsing de visión y para ambos agentes. `temperature=0`
 en todo el pipeline. `detail="high"` en las llamadas de visión.
 
-**Justificación:** la rúbrica nombra GPT-4o explícitamente (criterio 1.1); cambiarlo
-es riesgo innecesario. Una sola decisión de modelo es más fácil de defender que tres.
+**Justificación:** la rúbrica nombra GPT-4o explícitamente (criterio 1.1).
 `detail="high"` cuesta más tokens pero en `low` la imagen se comprime a 512×512 y se
 pierde texto pequeño: en un contrato, perder un número es perder todo.
 
